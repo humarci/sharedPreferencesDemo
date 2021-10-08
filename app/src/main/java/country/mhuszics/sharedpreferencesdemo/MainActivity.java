@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String Pass = "passKey";
     public static final String Email = "emailKey";
 
+    public String name_value;
+    public String pass_value;
+    public String email_value;
+
     SharedPreferences sharedPreferences;
 
     @Override
@@ -34,12 +38,32 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPreferences, Context.MODE_PRIVATE);
 
+        readValues();
+        writeValues();
+    }
+
+    public void readValues(){
+        name_value = sharedPreferences.getString(Name, null);
+        pass_value = sharedPreferences.getString(Pass, null);
+        email_value = sharedPreferences.getString(Email, null);
+        if (name_value != null) {
+            ed1.setText(name_value);
+        }
+        if (pass_value != null) {
+            ed2.setText(pass_value);
+        }
+        if (email_value != null) {
+            ed3.setText(email_value);
+        }
+    }
+
+    public void writeValues(){
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name_value = ed1.getText().toString();
-                String pass_value = ed2.getText().toString();
-                String email_value = ed3.getText().toString();
+                name_value = ed1.getText().toString();
+                pass_value = ed2.getText().toString();
+                email_value = ed3.getText().toString();
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
